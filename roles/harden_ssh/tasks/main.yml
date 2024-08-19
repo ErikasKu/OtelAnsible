@@ -2,7 +2,7 @@
 - name: Deploy test SSHD configuration file
   ansible.builtin.template:
     src: sshd_config_template.j2
-    dest: /etc/ansible/templates/sshd_config_fedora_backup.j2
+    dest: /etc/ssh/sshd_config
     owner: root
     group: root
     mode: '0644'

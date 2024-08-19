@@ -3,9 +3,10 @@
   hosts: localhost
   become: yes
   roles:
-    #- role: harden_ssh
+    - role: harden_ssh
     #- role: docker_prep
     #- role: go_install
     #- role: otel_install
     #- role: fw_hardening
-    - role: harden_kernel
+    #- role: harden_kernel
+    - role: telemetry_environment
