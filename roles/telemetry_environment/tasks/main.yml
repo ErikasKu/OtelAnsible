@@ -1,6 +1,6 @@
 - name: Create output file for logs
   ansible.builtin.file:
-    path: {{ OUTPUT_DIR }}
+    path: "{{ OUTPUT_DIR }}"
     state: touch
 
 - name: Setting facts for OS_SYSTEM - Fedora
@@ -18,7 +18,7 @@
 - name: Create OTEL collector config
   ansible.builtin.template:
     src: otel_config.j2
-    dest: {{ DEST_CONFIG }}
+    dest: "{{ DEST_CONFIG }}"
 
 - name: Run otel collector
   # What the following command does:
@@ -27,6 +27,6 @@
   # Since exporters in config file is listed, we do not need to specify output
   ansible.builtin.command: >
     sudo docker run
-    -v {{ DEST_CONFIG }}:/collector-config.yaml
+    -v "{{ DEST_CONFIG }}":/collector-config.yaml
     otel/opentelemetry-collector:0.106.1
     --config collector-config.yaml
