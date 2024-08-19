@@ -3,6 +3,18 @@
     path: {{ OUTPUT_DIR }}
     state: touch
 
+- name: Setting facts for OS_SYSTEM - Fedora
+  set_fact:
+    OS_System: "{{ ansible_distribution }}"
+  
+- name: Setting facts for IPV4
+  set_fact:
+    OS_System_IPv4: "{{ ansible_default_ipv4.address }}"
+
+- name: Setting facts for System Package module
+  set_fact:
+    OS_System_package_module: "{{ ansible_pkg_mgr }}"
+
 - name: Create OTEL collector config
   ansible.builtin.template:
     src: otel_config.j2
