@@ -1,9 +1,10 @@
-- name: Create output file for logs
+- name: Create output directory for logs
   ansible.builtin.file:
     path: "{{ OUTPUT_DIR }}"
-    state: touch
+    state: directory
+    mode: '0755'
 
-- name: Create folder for output
+- name: Create file for output
   ansible.builtin.file:
     path: "{{ OUTPUT_DIR_File }}"
     state: touch
