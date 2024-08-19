@@ -1,0 +1,4 @@
+- name: Restart Firewalld Service
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded

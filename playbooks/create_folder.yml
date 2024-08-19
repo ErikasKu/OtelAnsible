@@ -1,0 +1,6 @@
+---
+- name: test123
+  hosts: localhost
+  tasks:
+    - debug:
+        var: ansible_facts

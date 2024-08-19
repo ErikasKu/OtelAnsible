@@ -1,0 +1,20 @@
+# Ansible template for sshd_config folder
+
+Include /etc/ssh/sshd_config.d/*.conf
+AuthorizedKeysFile      .ssh/authorized_keys
+Subsystem       sftp    /usr/libexec/openssh/sftp-server
+
+                           # Testing activity #
+
+PermitRootLogin False
+MaxAuthTries 3
+LoginGraceTime 15s
+PermitEmptyPasswords False
+X11Forwarding False
+AllowAgentForwarding False
+AllowTcpForwarding False
+
+
+
+
+

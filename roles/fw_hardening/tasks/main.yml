@@ -1,0 +1,36 @@
+- name: Set Default interface
+  ansible.posix.firewalld:
+    zone: trusted
+        # how to get a network interface from the system automatically and assign it to be default?
+    interface: "{{ ansible_default_ipv4.interface }}" # by using facts module setting up system's default network interface in this case ens160
+        # OR we can use the following approach by enabling ansible.builtin.shell to get default network interface:
+        # cmd: firewall-cmd --permanent --zone=trusted --change-interface=$(ip route | grep default | awk '{print $5}')
+    permanent: true
+    state: enabled
+
+- name: Set Default Firewalld zone to trusted
+  ansible.builtin.shell:
+    cmd: firewall-cmd --set-default-zone=trusted
+
+- name: Allow various services
+  ansible.posix.firewalld:
+    zone: trusted
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    loop:
+      - ntp
+      - dns
+      - ssh
+      - http
+      - https
+
+- name: Allows open telemetry ports
+  ansible.posix.firewalld:
+    rich_rule: rule family="ipv4" port port="4317-4318" protocol="tcp" accept
+    zone: trusted
+    permanent: true
+    immediate: true
+    state: enabled
+  notify: Restart Firewalld Service
+

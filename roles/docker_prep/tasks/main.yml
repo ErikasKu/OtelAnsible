@@ -1,0 +1,42 @@
+- name: Remove old docker and its dependencies
+  ansible.builtin.dnf:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-selinux
+      - docker-engine-selinux
+      - docker-engine
+    autoremove: yes
+
+- name: Put Docker CE dependency in "/etc/yum_repos.d/"
+  ansible.builtin.yum_repository:
+    name: docker-ce
+    description: Docker CE Repository
+    baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://download.docker.com/linux/fedora/gpg
+
+- name: Refresh DNF cache
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+    update_cache: yes
+
+- name: Install Docker plugins
+  ansible.builtin.dnf:
+    name:
+      - dnf-plugins-core
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+  notify:
+    - Start Docker service
+    - Enable docker service

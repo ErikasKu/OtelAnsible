@@ -1,0 +1,9 @@
+- name: Install Go language
+  ansible.builtin.dnf:
+    name: golang
+
+- name: Setup Go language env variable
+  ansible.builtin.lineinfile:
+    path: /etc/profile
+    line: 'export GOBIN=${GOBIN:-$(go env GOPATH)/bin}'
+    state: present

@@ -1,0 +1,16 @@
+---
+
+- name: SSH Preparation
+  hosts: localhost
+
+  vars_files:
+    - /etc/ansible/vars/sshd_vars.yaml
+
+  tasks:
+    - name: Deploy test SSHD configuration file
+      ansible.builtin.template:
+        src: /etc/ansible/templates/sshd.j2 # source of the template location
+        dest: /etc/ansible/templates/sshd_config_fedora_backup.j2
+        owner: root
+        group: root
+        mode: '0644'

@@ -1,0 +1,25 @@
+# Kernel hardening parameter template
+
+net.ipv4.tcp_rfc1337={{ value1 }}
+net.ipv4.conf.all.rp_filter={{ value1 }}
+net.ipv4.conf.default.rp_filter={{ value1 }}
+net.ipv4.tcp_syncookies={{ value1 }}
+kernel.dmesg_restrict={{ value1 }}
+kernel.kptr_restrict={{ value1 }}
+kernel.unprivileged_bpf_disabled={{ value2 }}
+net.core.bpf_jit_harden={{ value2 }}
+net.ipv4.conf.all.accept_redirects={{ value0 }} 
+net.ipv4.conf.default.accept_redirects={{ value0 }}
+net.ipv4.conf.all.secure_redirects={{ value0 }}
+net.ipv4.conf.default.secure_redirects={{ value0 }}
+net.ipv6.conf.all.accept_redirects={{ value0 }}
+net.ipv6.conf.default.accept_redirects={{ value0 }}
+net.ipv4.conf.all.send_redirects={{ value0 }}
+net.ipv4.conf.default.send_redirects={{ value0 }}
+net.ipv4.icmp_echo_ignore_all={{ value1 }}
+net.ipv4.conf.all.accept_source_route={{ value0 }}
+net.ipv4.conf.default.accept_source_route={{ value0 }}
+net.ipv6.conf.all.accept_source_route={{ value0 }}
+net.ipv6.conf.default.accept_source_route={{ value0 }}
+net.ipv6.conf.all.accept_ra={{ value0 }}
+net.ipv6.conf.default.accept_ra={{ value0 }}

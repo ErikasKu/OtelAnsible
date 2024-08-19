@@ -1,0 +1,7 @@
+- name: Pull OTEL docker image
+  community.docker.docker_image:
+    name: otel/opentelemetry-collector:latest
+    source: pull
+
+- name: Run OTEL installation
+  ansible.builtin.command: go install github.com/open-telemetry/opentelemetry-collector-contrib/cmd/telemetrygen@latest
