@@ -1,0 +1,57 @@
+receivers:
+  # Data sources: traces, metrics, logs
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+  hostmetrics:
+    collection_interval: 10s
+    scrapers:
+      cpu:
+      load:
+      disk:
+      filesystem:
+
+processors:
+  attributes:
+    actions:
+      - key: os.system
+        value: {{ OS_System }}
+        action: insert 
+        
+      # Returns OS IPv4 address
+      - key: os.ipv4.address
+        value: {{ OS_System_IPv4 }}
+        action: insert
+        
+      # Update OS system to FedoraOS
+      - key: os.system
+        value: "FedoraOS"
+        action: update
+    
+      # Add Package module manager information
+      - key: os.package.manager
+        value: {{ OS_System_package_module }}
+        action: insert
+        
+      # Add random dev environment entry:
+      - key: os.env
+        value: "SBX"
+        action: insert
+  batch:
+    timeout: 10s
+  
+exporters:
+  # Export data to a file
+  file:
+    path: {{ OUTPUT_DIR }}
+
+service:
+  pipelines:
+    metrics:
+      receivers: [hostmetrics]
+      processors: [attributes, batch]
+      exporters: [file]
