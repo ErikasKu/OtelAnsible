@@ -37,6 +37,7 @@
   # Since exporters in config file is listed, we do not need to specify output
   ansible.builtin.command: >
     sudo docker run
-    -v /etc/otel/collector-config.yml:/collector-config.yaml
-    otel/opentelemetry-collector:0.106.1
+    -v /etc/otel/collector-config.yml:/collector-config.yaml 
+    -v /var/log/otel_folder/:/var/log/otel_folder/ 
+    otel/opentelemetry-collector:0.106.1 
     --config /collector-config.yaml
