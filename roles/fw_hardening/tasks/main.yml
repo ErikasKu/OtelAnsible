@@ -15,15 +15,15 @@
 - name: Allow various services
   ansible.posix.firewalld:
     zone: trusted
-    service: {{ item }}
+    service: "{{ item }}"
     permanent: true
     state: enabled
-    loop:
-      - ntp
-      - dns
-      - ssh
-      - http
-      - https
+  loop:
+    - ntp
+    - dns
+    - ssh
+    - http
+    - https
 
 - name: Allows open telemetry ports
   ansible.posix.firewalld:
