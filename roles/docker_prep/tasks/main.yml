@@ -37,8 +37,10 @@
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
-  notify:
-    - Start Docker service
-
-
+      
+- name: Start Docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
 
