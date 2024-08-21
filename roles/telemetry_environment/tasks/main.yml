@@ -34,10 +34,11 @@
   # What the following command does:
   # It runs docker container for otel collector using configuration file
   # that is created on DEST_CONFIG or in /etc/otel/collector-config.yaml
+  
   # Since exporters in config file is listed, we do not need to specify output
-  ansible.builtin.command: >
-    sudo docker run
-    -v /etc/otel/collector-config.yml:/collector-config.yaml 
-    -v /var/log/otel_folder/:/var/log/otel_folder/ 
-    otel/opentelemetry-collector:0.106.1 
-    --config /collector-config.yaml
+  #ansible.builtin.command: >
+    #sudo docker run
+   # -v /etc/otel/collector-config.yml:/collector-config.yaml 
+    #-v /var/log/otel_folder/:/var/log/otel_folder/ 
+   # otel/opentelemetry-collector:0.106.1 
+    #--config /collector-config.yaml
