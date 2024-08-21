@@ -30,7 +30,7 @@
     src: otel_config.j2
     dest: "{{ DEST_CONFIG_File }}"
 
-- name: Run otel collector
+#- name: Run otel collector
   # What the following command does:
   # It runs docker container for otel collector using configuration file
   # that is created on DEST_CONFIG or in /etc/otel/collector-config.yaml
