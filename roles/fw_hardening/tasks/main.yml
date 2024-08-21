@@ -15,7 +15,7 @@
 - name: Allow various services
   ansible.posix.firewalld:
     zone: trusted
-    service: "{{ item }}"
+    service: {{ item }}
     permanent: true
     state: enabled
     loop:
