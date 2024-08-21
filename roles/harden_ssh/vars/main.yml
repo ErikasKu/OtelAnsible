@@ -8,5 +8,5 @@ sshd_permit_empty_passwords: "no"
 sshd_x11_forwarding: "no"
 sshd_allow_agent_forwarding: "no"
 sshd_allow_tcp_forwarding: "no"
-
+sshd_banner: "/etc/ssh/ssh_banner"
 

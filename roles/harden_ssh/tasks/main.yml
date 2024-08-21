@@ -6,4 +6,9 @@
     owner: root
     group: root
     mode: '0644'
+  
+- name: Deploy banner config
+  ansible.builtin.template: 
+    src: banner_info.j2
+    dest: {{ sshd_banner }}
   notify: Restart sshd service
