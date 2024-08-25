@@ -23,5 +23,5 @@
 - name: Deploy banner config
   ansible.builtin.template: 
     src: banner_info.j2
-    dest: {{ sshd_banner }}
+    dest: "{{ sshd_banner }}"
   notify: Deploy banner config
