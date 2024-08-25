@@ -1,17 +1,36 @@
+- name: Check if output directory exists
+  stat: 
+    path: "{{ OUTPUT_DIR }}"
+  register: backup_folder_exists
+
 - name: Create output directory for logs
   ansible.builtin.file:
     path: "{{ OUTPUT_DIR }}"
     state: directory
+  when: not backup_folder_exists
 
-- name: Create file for output
+- name: Check if output file exists
+  stat:
+    path: "{{ OUTPUT_DIR_File }}"
+  register: output_file_exists
+
+- name: Create file for output data
   ansible.builtin.file:
     path: "{{ OUTPUT_DIR_File }}"
     state: touch
+    mode: '0644'
+  when: not output_file_exists
+
+- name: Check if otel folder exists
+  stat:
+    path: "{{ DEST_CONFIG_FOLDER }}"
+  register: otel_config_folder_exists
 
 - name: Create folder for otel configuration
   ansible.builtin.file:
     path: "{{ DEST_CONFIG_FOLDER }}"
     state: directory
+  when: not otel_config_folder_exists
 
 - name: Setting facts for OS_SYSTEM - Fedora
   set_fact:
@@ -25,19 +44,26 @@
   set_fact:
     OS_System_package_module: "{{ ansible_pkg_mgr }}"
 
+- name: Check if Otel Configuration file exists
+  stat:
+    path: "{{ DEST_CONFIG_File }}"
+  register: otel_config_file
+
 - name: Create OTEL collector config
   ansible.builtin.template:
     src: otel_config.j2
     dest: "{{ DEST_CONFIG_File }}"
+  when: not otel_config_file
 
-#- name: Run otel collector
+- name: Run otel collector
   # What the following command does:
   # It runs docker container for otel collector using configuration file
   # that is created on DEST_CONFIG or in /etc/otel/collector-config.yaml
   
   # Since exporters in config file is listed, we do not need to specify output
-  #ansible.builtin.command: >
-  sudo docker run -v /etc/otel/collector-config.yml:/collector-config.yaml \
-  -v /var/log/otel_folder/:/var/log/otel_folder/ \
-  otel/opentelemetry-collector:0.106.1 \
-  --config /collector-config.yaml 
+  ansible.builtin.command: >
+    sudo docker run
+    -v /etc/otel/collector-config.yml:/collector-config.yaml
+    -v /var/log/otel_folder/:/var/log/otel_folder/
+    otel/opentelemetry-collector:0.106.1
+    --config /collector-config.yaml &

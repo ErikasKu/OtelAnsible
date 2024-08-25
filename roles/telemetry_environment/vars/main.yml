@@ -1,9 +1,3 @@
-# Variables for OTEL configuration
-
-# OS_System: "{{ ansible_distribution }}"
-# OS_System_IPv4: "{{ ansible_default_ipv4.address }}"
-# OS_System_package_module: "{{ ansible_pkg_mgr }}"
-
 OUTPUT_DIR: /var/log/otel_folder/
 OUTPUT_DIR_File: /var/log/otel_folder/output.txt
 DEST_CONFIG_FOLDER: /etc/otel/
