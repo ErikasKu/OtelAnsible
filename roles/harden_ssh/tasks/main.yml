@@ -1,16 +1,20 @@
 - name: Check if backup exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/ssh/sshd_config.bak
   register: backup_exists
 
-- name: Create a backup if it does not exist
+- name: Create backup file
+  ansible.builtin.file:
+    path: /etc/ssh/sshd_config.bak
+    state: touch
+    mode: '0644'
+  when: not backup_exists
+
+- name: Copy a backup data to .bak file
   ansible.builtin.copy:
     path: /etc/ssh/sshd_config
     dest: /etc/ssh/sshd_config.bak
-    owner: root
-    group: root
-    mode: '0644'
-  when: not backup_exists
+    backup: yes
 
 - name: Deploy sshd_config configuration file
   ansible.builtin.template:
@@ -21,7 +25,7 @@
     mode: '0644'
 
 - name: Check banner file exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/ssh/ssh_banner
   register: banner_file
 

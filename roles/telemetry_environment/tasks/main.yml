@@ -1,5 +1,5 @@
 - name: Check if output directory exists
-  stat: 
+  ansible.builtin.stat: 
     path: "{{ OUTPUT_DIR }}"
   register: backup_folder_exists
 
@@ -10,7 +10,7 @@
   when: not backup_folder_exists
 
 - name: Check if output file exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ OUTPUT_DIR_File }}"
   register: output_file_exists
 
@@ -22,7 +22,7 @@
   when: not output_file_exists
 
 - name: Check if otel folder exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ DEST_CONFIG_FOLDER }}"
   register: otel_config_folder_exists
 
@@ -49,11 +49,16 @@
     path: "{{ DEST_CONFIG_File }}"
   register: otel_config_file
 
-- name: Create OTEL collector config
+- name: Create otel config file
+  ansible.builtin.file:
+    path: "{{ DEST_CONFIG_File }}"
+    state: touch
+    mode: '0644'
+
+- name: Deploy OTEL collector config
   ansible.builtin.template:
     src: otel_config.j2
     dest: "{{ DEST_CONFIG_File }}"
-  when: not otel_config_file
 
 - name: Run otel collector
   # What the following command does:
