@@ -1,9 +1,9 @@
 - name: Create configuration file
   ansible.builtin.file:
-    path: /etc/sysctl.d/custom_kernel_hardening.conf
+    path: /etc/sysctl.d/99-custom.conf
     state: touch
 
-- name: Apply kerner hardening
+- name: Apply kernel hardening
   ansible.builtin.template:
     src: kernel_template.j2
     dest: /etc/sysctl.d/99-custom.conf
