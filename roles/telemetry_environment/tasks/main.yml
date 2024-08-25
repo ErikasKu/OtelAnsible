@@ -54,6 +54,7 @@
     path: "{{ DEST_CONFIG_File }}"
     state: touch
     mode: '0644'
+  when: not otel_config_file.stat.exists
 
 - name: Deploy OTEL collector config
   ansible.builtin.template:
