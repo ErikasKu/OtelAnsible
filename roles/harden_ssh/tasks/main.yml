@@ -12,7 +12,7 @@
 
 - name: Copy a backup data to .bak file
   ansible.builtin.copy:
-    path: /etc/ssh/sshd_config
+    src: /etc/ssh/sshd_config
     dest: /etc/ssh/sshd_config.bak
     backup: yes
 
