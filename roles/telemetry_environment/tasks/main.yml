@@ -71,5 +71,5 @@
     sudo docker run
     -v /etc/otel/collector-config.yml:/collector-config.yaml
     -v /var/log/otel_folder/:/var/log/otel_folder/
-    otel/opentelemetry-collector:0.106.1
+    otel/opentelemetry-collector:latest
     --config /collector-config.yaml &
