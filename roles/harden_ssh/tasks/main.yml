@@ -30,7 +30,7 @@
     path: /etc/ssh/ssh_banner
     state: touch
     mode: '0644'
-  register: not banner_file
+  when: not banner_file
 
 - name: Deploy banner config
   ansible.builtin.template: 
