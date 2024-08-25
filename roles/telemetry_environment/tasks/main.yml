@@ -7,7 +7,7 @@
   ansible.builtin.file:
     path: "{{ OUTPUT_DIR }}"
     state: directory
-  when: not backup_folder_exists
+  when: not backup_folder_exists.stat.exists
 
 - name: Check if output file exists
   ansible.builtin.stat:
@@ -19,7 +19,7 @@
     path: "{{ OUTPUT_DIR_File }}"
     state: touch
     mode: '0644'
-  when: not output_file_exists
+  when: not output_file_exists.stat.exists
 
 - name: Check if otel folder exists
   ansible.builtin.stat:
@@ -30,7 +30,7 @@
   ansible.builtin.file:
     path: "{{ DEST_CONFIG_FOLDER }}"
     state: directory
-  when: not otel_config_folder_exists
+  when: not otel_config_folder_exists.stat.exists
 
 - name: Setting facts for OS_SYSTEM - Fedora
   set_fact:

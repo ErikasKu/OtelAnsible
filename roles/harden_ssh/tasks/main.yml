@@ -3,18 +3,12 @@
     path: /etc/ssh/sshd_config.bak
   register: backup_exists
 
-- name: Create backup file
-  ansible.builtin.file:
-    path: /etc/ssh/sshd_config.bak
-    state: touch
-    mode: '0644'
-  when: not backup_exists
-
 - name: Copy a backup data to .bak file
   ansible.builtin.copy:
     src: /etc/ssh/sshd_config
     dest: /etc/ssh/sshd_config.bak
-    backup: yes
+    mode: '0644'
+  when: not backup_exists.stat.exists
 
 - name: Deploy sshd_config configuration file
   ansible.builtin.template:
@@ -34,7 +28,7 @@
     path: /etc/ssh/ssh_banner
     state: touch
     mode: '0644'
-  when: not banner_file
+  when: not banner_file.stat.exists
 
 - name: Deploy banner config
   ansible.builtin.template: 
