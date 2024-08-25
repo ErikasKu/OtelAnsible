@@ -2,3 +2,4 @@
   ansible.builtin.service:
     name: firewalld
     state: reloaded
+  listen: Allows open telemetry ports
