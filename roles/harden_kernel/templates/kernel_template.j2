@@ -7,20 +7,20 @@
 # Values explanation: https://wiki.archlinux.org/title/Talk:Sysctl 
 # Values - 0 - a possibility to assasinate a socket in "time_wait" prematurely upon receiving a RST flag
 # Values - 1 - letting "time_wait" packets idle out even if reset is received
-net.ipv4.tcp_rfc1337= {{ Net_IPv4_Tcp_RFC1337 }}
+net.ipv4.tcp_rfc1337={{ Net_IPv4_Tcp_RFC1337 }}
 
 # Grouped together to prevent IP spoofing methods:
 # Basic understanding of "rp_filter" https://access.redhat.com/solutions/53031
 # Values - 0 - no source validation 
 # Values - 1 - strict mode as defined in RFC3704 - Strict Reverse Path (recommended)
 # Values - 2 - lose mode - Loose Reverse path
-net.ipv4.conf.all.rp_filter= {{ Net_IPv4_Conf_All_RP_Filter }}
-net.ipv4.conf.default.rp_filter= {{ Net_IPv4_Conf_Default_RP_Filter }}
-net.ipv4.tcp_syncookies= {{ Net_IPv4_Tcp_Syncookies }}
+net.ipv4.conf.all.rp_filter={{ Net_IPv4_Conf_All_RP_Filter }}
+net.ipv4.conf.default.rp_filter={{ Net_IPv4_Conf_Default_RP_Filter }}
+net.ipv4.tcp_syncookies={{ Net_IPv4_Tcp_Syncookies }}
 
 # Exposes a large amount of useful kernel debugging information, 
 # but this can often leak sensitive information, such as kernel pointers
-kernel.dmesg_restrict= {{ Kernel_Dmesg_Restrict }}
+kernel.dmesg_restrict={{ Kernel_Dmesg_Restrict }}
 
 
 # Since pointers allows to point a location in memory, it allows exploitation, by default they are not hidden
@@ -30,7 +30,7 @@ kernel.dmesg_restrict= {{ Kernel_Dmesg_Restrict }}
 # Values - 0 - not hidden - default setting
 # Values - 1 - hidden, if having CAP_SYSLOG and effective group ids - not hidden
 # Values - 2 - hidden for everyone
-kernel.kptr_restrict= {{ Kernel_Kptr_Restrict }}
+kernel.kptr_restrict={{ Kernel_Kptr_Restrict }}
 
 
 # Since kernel log will be displayed in the console during boot, malware can record the screen and abuse to get higher privileges
@@ -40,42 +40,42 @@ kernel.kptr_restrict= {{ Kernel_Kptr_Restrict }}
 # Values: - 0 - unprivileged mode 
 # Values: - 1 - only privileged users enable (until reboot), not changable unless reboot
 # Values: - 2 - only privileged users enabled, can be changed during runtime
-kernel.unprivileged_bpf_disabled= {{ Kernel_Unprivileged_Bpf_Disabled }}
+kernel.unprivileged_bpf_disabled={{ Kernel_Unprivileged_Bpf_Disabled }}
 
 # Hardening and protecting compiler against certain attacks like heap spraying https://obscurix.github.io/security/kernel-hardening.html 
 # Value reference: https://sysctl-explorer.net/net/core/bpf_jit_harden/
 # Values - 0 - disable JIT hardening - default value0
 # Values - 1 - enable JIT hardening for unprivileged users only
 # Values - 2 - enable JIT for all users
-net.core.bpf_jit_harden= {{ Net_Core_Bpf_Jit_Harden }}
+net.core.bpf_jit_harden={{ Net_Core_Bpf_Jit_Harden }}
 
 
 # Below all data is taken from: https://madaidans-insecurities.github.io/guides/linux-hardening.html#kernel
 
 # Set to disable ICMP redirect acceptance (all of the values has to be set to 0 - disable acceptance)
-net.ipv4.conf.all.accept_redirects= {{ Net_IPv4_Conf_All_Accept_Redirects }} 
-net.ipv4.conf.default.accept_redirects= {{ Net_IPv4_Conf_Default_Accept_Redirects }}
-net.ipv4.conf.all.secure_redirects= {{ Net_IPv4_Conf_All_Secure_Redirects }}
-net.ipv4.conf.default.secure_redirects= {{ Net_IPv4_Conf_Default_Secure_redirects }}
-net.ipv6.conf.all.accept_redirects= {{ Net_IPv6_Conf_All_Accept_Redirects }}
-net.ipv6.conf.default.accept_redirects= {{ Net_IPv6_Conf_Default_Accept_Redirects }}
+net.ipv4.conf.all.accept_redirects={{ Net_IPv4_Conf_All_Accept_Redirects }} 
+net.ipv4.conf.default.accept_redirects={{ Net_IPv4_Conf_Default_Accept_Redirects }}
+net.ipv4.conf.all.secure_redirects={{ Net_IPv4_Conf_All_Secure_Redirects }}
+net.ipv4.conf.default.secure_redirects={{ Net_IPv4_Conf_Default_Secure_redirects }}
+net.ipv6.conf.all.accept_redirects={{ Net_IPv6_Conf_All_Accept_Redirects }}
+net.ipv6.conf.default.accept_redirects={{ Net_IPv6_Conf_Default_Accept_Redirects }}
 
 # Makes system ignore ICMP requests (values is 0 due to disable acceptance)
-net.ipv4.conf.all.send_redirects= {{ Net_IP4_Conf_All_Send_Redirects }}
-net.ipv4.conf.default.send_redirects= {{ Net_IPv4_Conf_Default_Send_Redirects }}
+net.ipv4.conf.all.send_redirects={{ Net_IP4_Conf_All_Send_Redirects }}
+net.ipv4.conf.default.send_redirects={{ Net_IPv4_Conf_Default_Send_Redirects }}
 
 
 # Prevention of man-in-the-middle attacks - minimise information disclosure
 # Making kernel to ignore ICMP ECHO, default is 0 to allow ICMP ECHO, we set 1 to ignore
-net.ipv4.icmp_echo_ignore_all= {{ Net_IPv4_Icmp_Echo_Ignore_All }}
+net.ipv4.icmp_echo_ignore_all={{ Net_IPv4_Icmp_Echo_Ignore_All }}
 
 # Ignoring ICMP requests to avoid smurf attacks making device more hard to enumerate and clock fingerprinting prevention
 # Setting 0 to ignore
-net.ipv4.conf.all.accept_source_route= {{ Net_IPv4_Conf_All_Accept_Source_Route }}
-net.ipv4.conf.default.accept_source_route= {{ Net_IPv4_Conf_Default_Accept_Source_Route }}
-net.ipv6.conf.all.accept_source_route= {{ Net_IPv6_Conf_All_Accept_Source_Route }}
-net.ipv6.conf.default.accept_source_route= {{ Net_IPv6_Conf_Default_Accept_Source_Route }}
+net.ipv4.conf.all.accept_source_route={{ Net_IPv4_Conf_All_Accept_Source_Route }}
+net.ipv4.conf.default.accept_source_route={{ Net_IPv4_Conf_Default_Accept_Source_Route }}
+net.ipv6.conf.all.accept_source_route={{ Net_IPv6_Conf_All_Accept_Source_Route }}
+net.ipv6.conf.default.accept_source_route={{ Net_IPv6_Conf_Default_Accept_Source_Route }}
 
 # Source routing allows users to redirect network traffic, enabling MIM. We need to disable it, setting to 0 to make it disabled.
-net.ipv6.conf.all.accept_ra= {{ Net_IPv6_Conf_All_Accept_RA }}
-net.ipv6.conf.default.accept_ra= {{ Net_IPv6_Conf_Default_Accept_RA }}
+net.ipv6.conf.all.accept_ra={{ Net_IPv6_Conf_All_Accept_RA }}
+net.ipv6.conf.default.accept_ra={{ Net_IPv6_Conf_Default_Accept_RA }}
