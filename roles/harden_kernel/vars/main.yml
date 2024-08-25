@@ -1,10 +1,10 @@
 # Avoid time assasination attacks
-net.IPv4.Tcp_RFC1337 : 1
+Net.IPv4.Tcp_RFC1337 : 1
 
 # Prevent Spoofing methods
-net.IPv4.Conf.All.RP_Filter: 1
-net.IPv4.Conf.Default.RP_Filter: 1
-net.IPv4.Tcp_Syncookies: 1
+Net.IPv4.Conf.All.RP_Filter: 1
+Net.IPv4.Conf.Default.RP_Filter: 1
+Net.IPv4.Tcp_Syncookies: 1
 
 # Avoid kernel leaking pointer data
 Kernel.Dmesg_Restrict: 1
@@ -16,29 +16,29 @@ Kernel.Kptr_Restrict: 1
 Kernel.Unprivileged_Bpf_Disabled: 2
 
 # Kernel and compiler protection, example heap spray prevetion
-net.Core.Bpf_Jit_Harden: 2
+Net.Core.Bpf_Jit_Harden: 2
 
 # Disable ICMP redirection
-net.IPv4.Conf.All.Accept_Redirects: 0
-net.IPv4.Conf.Default.Accept_Redirects: 0
-net.IPv4.Conf.All.Secure_Redirects: 0
-net.IPv4.Conf.Default.Secure_redirects: 0
-net.IPv6.Conf.All.Accept_Redirects: 0
-net.IPv6.Conf.Default.Accept_Redirects: 0
+Net.IPv4.Conf.All.Accept_Redirects: 0
+Net.IPv4.Conf.Default.Accept_Redirects: 0
+Net.IPv4.Conf.All.Secure_Redirects: 0
+Net.IPv4.Conf.Default.Secure_redirects: 0
+Net.IPv6.Conf.All.Accept_Redirects: 0
+Net.IPv6.Conf.Default.Accept_Redirects: 0
 
 # Make system ignore ICMP requests
-net.IP4.Conf.All.Send_Redirects: 0
-net.IPv4.Conf.Default.Send_Redirects: 0
+Net.IP4.Conf.All.Send_Redirects: 0
+Net.IPv4.Conf.Default.Send_Redirects: 0
 
 # Prevention of MIM
-net.IPv4.Icmp_Echo_Ignore_All: 1
+Net.IPv4.Icmp_Echo_Ignore_All: 1
 
 # Ignoring ICMP requests to avoid smurf attacks
-net.IPv4.Conf.All.Accept_Source_Route: 0
-net.IPv4.Conf.Default.Accept_Source_Route: 0
-net.IPv6.Conf.All.Accept_Source_Route: 0
-net.IPv6.Conf.Default.Accept_Source_Route: 0
+Net.IPv4.Conf.All.Accept_Source_Route: 0
+Net.IPv4.Conf.Default.Accept_Source_Route: 0
+Net.IPv6.Conf.All.Accept_Source_Route: 0
+Net.IPv6.Conf.Default.Accept_Source_Route: 0
 
 # Preventing source routing for MIM
-net.IPv6.Conf.All.Accept_RA: 0
-net.IPv6.Conf.Default.Accept_RA: 0
+Net.IPv6.Conf.All.Accept_RA: 0
+Net.IPv6.Conf.Default.Accept_RA: 0
