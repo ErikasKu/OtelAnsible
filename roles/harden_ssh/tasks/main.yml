@@ -1,5 +1,18 @@
+- name: Check if backup exists
+  stat:
+    path: /etc/ssh/sshd_config.bak
+  register: backup_exists
 
-- name: Deploy test SSHD configuration file
+- name: Create a backup if it does not exist
+  ansible.builtin.copy:
+    path: /etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config.bak
+    owner: root
+    group: root
+    mode: '0644'
+  when: not backup_exists
+
+- name: Deploy sshd_config configuration file
   ansible.builtin.template:
     src: sshd_config_template.j2
     dest: /etc/ssh/sshd_config
@@ -10,5 +23,5 @@
 - name: Deploy banner config
   ansible.builtin.template: 
     src: banner_info.j2
-    dest: "{{ sshd_banner }}"
-  notify: Restart sshd service
+    dest: {{ sshd_banner }}
+  notify: Deploy banner config
